@@ -1,0 +1,15 @@
+﻿@model BookListViewModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Books</h2>
+
+<ul>
+@foreach (var book in Model.Books)
+{
+    <li>@book.Title</li>
+}
+</ul>

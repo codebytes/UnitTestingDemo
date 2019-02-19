@@ -8,5 +8,6 @@ namespace UnitTestingDemo.Services.Interfaces
     public interface IBookService
     {
         IEnumerable<Book> GetAll();
+        Book GetById(int id);
     }
 }

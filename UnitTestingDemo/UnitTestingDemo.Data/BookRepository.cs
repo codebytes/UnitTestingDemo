@@ -25,7 +25,7 @@ namespace UnitTestingDemo.Data
 
         public BookEntity GetById(int id)
         {
-            throw new NotImplementedException();
+            return _bookContext.Books.FirstOrDefault(x => x.Id == id);
         }
 
         public void Save(BookEntity saveThis)

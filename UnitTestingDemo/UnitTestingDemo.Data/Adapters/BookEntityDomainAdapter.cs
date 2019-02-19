@@ -9,22 +9,14 @@ namespace UnitTestingDemo.Data.Adapters
     {
         public Book Adapt(BookEntity bookEntity)
         {
-            return new Book
-            {
-                Id = bookEntity.Id,
-                Title = bookEntity.Title,
-                Author = bookEntity.Author
-            };
-        }
-
-        public BookEntity FromDomain(Book book)
-        {
-            return new BookEntity
-            {
-                Id = book.Id,
-                Title = book.Title,
-                Author = book.Title
-            };
+            return bookEntity == null
+                ? null
+                : new Book
+                    {
+                        Id = bookEntity.Id,
+                        Title = bookEntity.Title,
+                        Author = bookEntity.Author
+                    };
         }
     }
 }

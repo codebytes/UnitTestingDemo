@@ -62,5 +62,42 @@ namespace UnitTestingDemo.Services.Tests
             _mockBookEntityDomainAdapter.Verify(x=>x.Adapt(It.IsAny<BookEntity>()),
                 Times.Exactly(sampleData.Count));
         }
+
+        [TestMethod]
+        public void GetById_ItemsInRepository_ReturnsItem()
+        {
+            //arrange
+            var bookEntity = new BookEntity();
+            _mockBookRepository.Setup(x => x.GetById(It.IsAny<int>()))
+                .Returns(bookEntity);
+            _mockBookEntityDomainAdapter.Setup(x => x.Adapt(It.IsAny<BookEntity>()))
+                .Returns(new Book());
+            int id = 1;
+
+            //act
+            var result = _bookService.GetById(id);
+            
+            //assert
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void GetById_NoItem_ReturnsNull()
+        {
+            //arrange
+            var bookEntity = new BookEntity();
+            _mockBookRepository.Setup(x => x.GetById(It.IsAny<int>()))
+                .Returns(bookEntity);
+            _mockBookEntityDomainAdapter.Setup(x => x.Adapt(It.IsAny<BookEntity>()))
+                .Returns(new Book());
+            int id = 1;
+
+            //act
+            var result = _bookService.GetById(id);
+
+            //assert
+            Assert.IsNotNull(result);
+        }
+
     }
 }

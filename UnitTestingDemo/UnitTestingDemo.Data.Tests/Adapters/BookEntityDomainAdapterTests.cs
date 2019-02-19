@@ -16,6 +16,19 @@ namespace UnitTestingDemo.Data.Tests.Adapters
         }
 
         [TestMethod]
+        public void Adapt_NullItem_ReturnsNull()
+        {
+            //Arrange
+            BookEntity bookEntity = null;
+
+            //Act
+            var book = _bookEntityDomainAdapter.Adapt(bookEntity);
+
+            //Assert
+            Assert.IsNull(book);
+        }
+
+        [TestMethod]
         public void Adapt_Id_IsEqual()
         {
             //Arrange

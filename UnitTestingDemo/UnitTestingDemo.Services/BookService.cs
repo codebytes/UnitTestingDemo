@@ -22,5 +22,10 @@ namespace UnitTestingDemo.Services
         {
             return _bookRepository.GetAll().Select(b=>_bookEntityDomainAdapter.Adapt(b));
         }
+
+        public Book GetById(int id)
+        {
+            return _bookEntityDomainAdapter.Adapt(_bookRepository.GetById(id));
+        }
     }
 }

@@ -5,11 +5,14 @@ namespace UnitTestingDemo.Data.Contexts
 {
     public class BookContext : DbContext
     {
+        public BookContext()
+        { }
+
         public BookContext(DbContextOptions<BookContext> options)
             : base(options)
         { }
 
-        public DbSet<BookEntity> Books { get; set; }
-        public DbSet<AuthorEntity> Authors { get; set; }
+        public virtual DbSet<BookEntity> Books { get; set; }
+        public virtual DbSet<AuthorEntity> Authors { get; set; }
     }
 }

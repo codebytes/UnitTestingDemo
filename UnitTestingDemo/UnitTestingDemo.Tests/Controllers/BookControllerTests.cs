@@ -51,5 +51,23 @@ namespace UnitTestingDemo.Tests.Controllers
             Assert.IsNotNull(response.Model);
             Assert.IsInstanceOfType(response.Model, typeof(BookListViewModel));
         }
+
+        [TestMethod]
+        public void Index_calls_BookService()
+        {
+            //arrange
+            var bookList = new List<Book>
+            {
+                new Book{Id = 1, Title = "Testing", AuthorId = 1}
+            };
+            _mockBookService.Setup(x => x.GetAll())
+                .Returns(bookList);
+
+            //act
+            var response = _bookController.Index() as ViewResult;
+
+            //assert
+            _mockBookService.Verify(x=>x.GetAll(), Times.Once);
+        }
     }
 }

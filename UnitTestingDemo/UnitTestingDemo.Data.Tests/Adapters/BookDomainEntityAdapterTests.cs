@@ -1,108 +1,108 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnitTestingDemo.Data.Adapters;
-using UnitTestingDemo.Data.EntityModels;
+using UnitTestingDemo.Domain;
 
 namespace UnitTestingDemo.Data.Tests.Adapters
 {
     [ExcludeFromCodeCoverage]
     [TestClass]
-    public class BookEntityDomainAdapterTests
+    public class BookDomainEntityAdapterTests
     {
-        private BookEntityDomainAdapter _bookEntityDomainAdapter;
+        private BookDomainEntityAdapter _bookDomainEntityAdapter;
 
         [TestInitialize]
         public void TestInitialize()
         {
-            _bookEntityDomainAdapter = new BookEntityDomainAdapter();
+            _bookDomainEntityAdapter = new BookDomainEntityAdapter();
         }
 
         [TestMethod]
         public void Adapt_NullItem_ReturnsNull()
         {
             //Arrange
-            BookEntity bookEntity = null;
+            Book book = null;
 
             //Act
-            var book = _bookEntityDomainAdapter.Adapt(bookEntity);
+            var bookEntity = _bookDomainEntityAdapter.Adapt(book);
 
             //Assert
-            Assert.IsNull(book);
+            Assert.IsNull(bookEntity);
         }
 
         [TestMethod]
         public void Adapt_Id_IsEqual()
         {
             //Arrange
-            var bookEntity = new BookEntity
+            var book = new Book
             {
                 Id = 1,
                 Title = "Test Title",
             };
 
             //Act
-            var book = _bookEntityDomainAdapter.Adapt(bookEntity);
+            var bookEntity = _bookDomainEntityAdapter.Adapt(book);
 
             //Assert
-            Assert.AreEqual(bookEntity.Id, book.Id);
+            Assert.AreEqual(book.Id, bookEntity.Id);
         }
 
         [TestMethod]
         public void Adapt_Title_IsEqual()
         {
             //Arrange
-            var bookEntity = new BookEntity
+            var book = new Book
             {
                 Id = 1,
                 Title = "Test Title"
             };
 
             //Act
-            var book = _bookEntityDomainAdapter.Adapt(bookEntity);
+            var bookEntity = _bookDomainEntityAdapter.Adapt(book);
 
             //Assert
-            Assert.AreEqual(bookEntity.Title, book.Title);
+            Assert.AreEqual(book.Title, bookEntity.Title);
         }
 
         [TestMethod]
         public void Adapt_AuthorId_IsEqual()
         {
             //Arrange
-            var authorEntity = new AuthorEntity {Id = 1, FirstName = "Chris", LastName = "Ayers"};
-            var bookEntity = new BookEntity
+            var author= new Author{Id = 1, FirstName = "Chris", LastName = "Ayers"};
+            var book= new Book
             {
                 Id = 1,
                 Title = "Test Title",
                 AuthorId = 1,
-                Author =  authorEntity
+                Author =  author
             };
 
             //Act
-            var book = _bookEntityDomainAdapter.Adapt(bookEntity);
+            var bookEntity = _bookDomainEntityAdapter.Adapt(book);
 
             //Assert
-            Assert.AreEqual(bookEntity.AuthorId, book.AuthorId);
+            Assert.AreEqual(book.AuthorId, bookEntity.AuthorId);
         }
 
         [TestMethod]
         public void Adapt_AuthorName_IsEqual()
         {
             //Arrange
-            var authorEntity = new AuthorEntity { Id = 1, FirstName = "Chris", LastName = "Ayers" };
-            var bookEntity = new BookEntity
+            var author = new Author { Id = 1, FirstName = "Chris", LastName = "Ayers" };
+            var book = new Book
             {
                 Id = 1,
                 Title = "Test Title",
                 AuthorId = 1,
-                Author = authorEntity
+                Author = author
             };
 
             //Act
-            var book = _bookEntityDomainAdapter.Adapt(bookEntity);
+            var bookEntity = _bookDomainEntityAdapter.Adapt(book);
 
             //Assert
-            Assert.AreEqual(bookEntity.Author.FirstName, book.Author.FirstName);
-            Assert.AreEqual(bookEntity.Author.LastName, book.Author.LastName);
+            Assert.AreEqual(book.Author.FirstName, bookEntity.Author.FirstName);
+            Assert.AreEqual(book.Author.LastName, bookEntity.Author.LastName);
         }
     }
 }

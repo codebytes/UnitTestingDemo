@@ -10,5 +10,6 @@ namespace UnitTestingDemo.Data.Contexts
         { }
 
         public DbSet<BookEntity> Books { get; set; }
+        public DbSet<AuthorEntity> Authors { get; set; }
     }
 }

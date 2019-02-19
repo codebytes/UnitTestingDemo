@@ -15,8 +15,21 @@ namespace UnitTestingDemo.Data.Adapters
                     {
                         Id = book.Id,
                         Title = book.Title,
-                        Author = book.Title
-                    };
+                        AuthorId = book.AuthorId,
+                        Author = AdaptAuthor(book.Author)
+                };
+        }
+
+        private AuthorEntity AdaptAuthor(Author bookAuthor)
+        {
+            return bookAuthor == null
+                ? null
+                : new AuthorEntity
+                {
+                    Id = bookAuthor.Id,
+                    FirstName = bookAuthor.FirstName,
+                    LastName = bookAuthor.LastName
+                };
         }
     }
 }

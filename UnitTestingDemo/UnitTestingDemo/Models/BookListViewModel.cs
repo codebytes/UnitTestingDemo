@@ -6,5 +6,6 @@ namespace UnitTestingDemo.Models
     public class BookListViewModel
     {
         public IEnumerable<Book> Books { get; set; }
+        public IEnumerable<Author> Authors { get; set; }
     }
 }

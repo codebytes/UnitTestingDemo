@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using UnitTestingDemo.Data.EntityModels;
 using UnitTestingDemo.Data.Interfaces;
 using UnitTestingDemo.Domain;
 
 namespace UnitTestingDemo.Services.Tests
 {
+    [ExcludeFromCodeCoverage]
     [TestClass]
     public class BookServiceTests
     {
@@ -57,9 +58,9 @@ namespace UnitTestingDemo.Services.Tests
             var result = _bookService.GetAll();
             //materialize list
             result.ToList();
-            
+
             //assert
-            _mockBookEntityDomainAdapter.Verify(x=>x.Adapt(It.IsAny<BookEntity>()),
+            _mockBookEntityDomainAdapter.Verify(x => x.Adapt(It.IsAny<BookEntity>()),
                 Times.Exactly(sampleData.Count));
         }
 
@@ -76,7 +77,7 @@ namespace UnitTestingDemo.Services.Tests
 
             //act
             var result = _bookService.GetById(id);
-            
+
             //assert
             Assert.IsNotNull(result);
         }
@@ -85,18 +86,18 @@ namespace UnitTestingDemo.Services.Tests
         public void GetById_NoItem_ReturnsNull()
         {
             //arrange
-            var bookEntity = new BookEntity();
+            BookEntity bookEntity = null;
             _mockBookRepository.Setup(x => x.GetById(It.IsAny<int>()))
                 .Returns(bookEntity);
             _mockBookEntityDomainAdapter.Setup(x => x.Adapt(It.IsAny<BookEntity>()))
-                .Returns(new Book());
+                .Returns(default(Book));
             int id = 1;
 
             //act
             var result = _bookService.GetById(id);
 
             //assert
-            Assert.IsNotNull(result);
+            Assert.IsNull(result);
         }
 
     }

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 using UnitTestingDemo.Data.Contexts;
 using UnitTestingDemo.Data.EntityModels;
 using UnitTestingDemo.Data.Interfaces;
-using UnitTestingDemo.Domain;
 
 namespace UnitTestingDemo.Data
 {
@@ -20,12 +19,18 @@ namespace UnitTestingDemo.Data
 
         public IList<BookEntity> GetAll()
         {
-            return _bookContext.Books.ToList();
+            return _bookContext
+                .Books
+                .Include(b=>b.Author)
+                .ToList();
         }
 
         public BookEntity GetById(int id)
         {
-            return _bookContext.Books.FirstOrDefault(x => x.Id == id);
+            return _bookContext
+                .Books
+                .Include(b => b.Author)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public void Save(BookEntity saveThis)

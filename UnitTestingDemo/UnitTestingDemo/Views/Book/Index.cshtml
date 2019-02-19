@@ -7,9 +7,13 @@
 
 <h2>Books</h2>
 
-<ul>
-@foreach (var book in Model.Books)
+@foreach (var author in Model.Authors)
 {
-    <li>@book.Title</li>
+    <h3>@author.FirstName @author.LastName</h3>
+    <ul>
+        @foreach (var book in Model.Books.Where(x=>x.AuthorId == author.Id))
+        {
+            <li>@book.Title</li>
+        }
+    </ul>
 }
-</ul>

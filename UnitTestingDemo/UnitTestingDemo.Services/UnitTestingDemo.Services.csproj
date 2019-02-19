@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UnitTestingDemo.Data\UnitTestingDemo.Data.csproj" />
+    <ProjectReference Include="..\UnitTestingDemo.Domain\UnitTestingDemo.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

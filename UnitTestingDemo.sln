@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo", "UnitTestingDemo\UnitTestingDemo.csproj", "{55970F10-87CB-4F50-B14B-6AB8258D22DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo", "src\UnitTestingDemo\UnitTestingDemo.csproj", "{55970F10-87CB-4F50-B14B-6AB8258D22DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Data", "UnitTestingDemo.Data\UnitTestingDemo.Data.csproj", "{54963324-B96D-4FB5-8B11-E00B9FC9016B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Data", "src\UnitTestingDemo.Data\UnitTestingDemo.Data.csproj", "{54963324-B96D-4FB5-8B11-E00B9FC9016B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Services", "UnitTestingDemo.Services\UnitTestingDemo.Services.csproj", "{6C2AF4F6-5FDE-4B8D-BD4F-8D0C424E2F1F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Services", "src\UnitTestingDemo.Services\UnitTestingDemo.Services.csproj", "{6C2AF4F6-5FDE-4B8D-BD4F-8D0C424E2F1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Domain", "UnitTestingDemo.Domain\UnitTestingDemo.Domain.csproj", "{959885B8-F972-42C6-8E2B-CA910CF643A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Domain", "src\UnitTestingDemo.Domain\UnitTestingDemo.Domain.csproj", "{959885B8-F972-42C6-8E2B-CA910CF643A8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CDB88796-4BCF-4578-89B8-100D596CDBF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Data.Tests", "UnitTestingDemo.Data.Tests\UnitTestingDemo.Data.Tests.csproj", "{EF7E491B-D3AC-4535-BE9D-9F1ECBD20D4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Data.Tests", "tests\UnitTestingDemo.Data.Tests\UnitTestingDemo.Data.Tests.csproj", "{EF7E491B-D3AC-4535-BE9D-9F1ECBD20D4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Tests", "UnitTestingDemo.Tests\UnitTestingDemo.Tests.csproj", "{511C1EC4-057A-4AF4-A3EF-5563800B3653}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Tests", "tests\UnitTestingDemo.Tests\UnitTestingDemo.Tests.csproj", "{511C1EC4-057A-4AF4-A3EF-5563800B3653}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Services.Tests", "UnitTestingDemo.Services.Tests\UnitTestingDemo.Services.Tests.csproj", "{B2998F44-32A3-4987-83F3-307F7A423EF2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingDemo.Services.Tests", "tests\UnitTestingDemo.Services.Tests\UnitTestingDemo.Services.Tests.csproj", "{B2998F44-32A3-4987-83F3-307F7A423EF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

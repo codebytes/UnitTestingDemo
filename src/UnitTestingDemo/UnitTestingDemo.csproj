@@ -13,9 +13,8 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\UnitTestingDemo.Data\UnitTestingDemo.Data.csproj" />
-    <ProjectReference Include="..\UnitTestingDemo.Domain\UnitTestingDemo.Domain.csproj" />
     <ProjectReference Include="..\UnitTestingDemo.Services\UnitTestingDemo.Services.csproj" />
+    <ProjectReference Include="..\UnitTestingDemo.Domain\UnitTestingDemo.Domain.csproj" />
   </ItemGroup>
 
 </Project>

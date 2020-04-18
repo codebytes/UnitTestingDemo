@@ -13,7 +13,8 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-
+  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
+  
 steps:
 - task: DotNetCoreCLI@2
   displayName: Restore nuget packages
@@ -21,6 +22,14 @@ steps:
     command: restore
     projects: '**/*.csproj'
     workingDirectory: $(Build.SourcesDirectory)
+
+- task: Cache@2
+  inputs:
+    key: 'nuget | "$(Agent.OS)" | **/packages.lock.json,!**/bin/**'
+    restoreKeys: |
+        nuget | "$(Agent.OS)"
+    path: $(NUGET_PACKAGES)
+  displayName: Cache NuGet packages
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -35,15 +44,16 @@ steps:
   inputs:
     command: test
     arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    projects: 'tests/**/*.csproj'
     nobuild: true
   continueOnError: true
 
 # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # First install the tool on the machine, then run it
-# - script: |
-#     dotnet tool install -g dotnet-reportgenerator-globaltool
-#     reportgenerator -reports:$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:Cobertura
-#   displayName: Create Code coverage report
+- script: |
+    dotnet tool install -g dotnet-reportgenerator-globaltool
+    reportgenerator -reports:$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:Cobertura
+  displayName: Create Code coverage report
 
 # Publish the code coverage result (summary and web site)
 # The summary allows to view the coverage percentage in the summary tab
@@ -53,8 +63,7 @@ steps:
   inputs:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
-    pathToSources: '$(Build.SourcesDirectory)'
-    # reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
 
 - task: PublishTestResults@2
   inputs:

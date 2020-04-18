@@ -16,5 +16,7 @@
     <ProjectReference Include="..\UnitTestingDemo.Services\UnitTestingDemo.Services.csproj" />
     <ProjectReference Include="..\UnitTestingDemo.Domain\UnitTestingDemo.Domain.csproj" />
   </ItemGroup>
-
+  <PropertyGroup>
+      <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>    
 </Project>

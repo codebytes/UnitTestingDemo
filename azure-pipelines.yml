@@ -21,6 +21,7 @@ steps:
   inputs:
     command: restore
     projects: '**/*.csproj'
+    arguments: '--locked-mode'
     workingDirectory: $(Build.SourcesDirectory)
 
 - task: Cache@2

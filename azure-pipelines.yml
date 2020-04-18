@@ -37,7 +37,7 @@ steps:
   inputs:
     command: test
     arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
-    projects: 'tests/**/*.csproj'
+    projects: '$(solution)'
     nobuild: true
   continueOnError: true
 
@@ -57,6 +57,7 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
     reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+    SourcesDirectory: '$(Build.SourcesDirectory)'
 
 - task: PublishTestResults@2
   inputs:

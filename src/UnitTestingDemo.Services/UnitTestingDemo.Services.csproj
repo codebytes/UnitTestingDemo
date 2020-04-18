@@ -8,8 +8,4 @@
     <ProjectReference Include="..\UnitTestingDemo.Domain\UnitTestingDemo.Domain.csproj" />
     <ProjectReference Include="..\UnitTestingDemo.Data\UnitTestingDemo.Data.csproj" />
   </ItemGroup>
-  <PropertyGroup>
-      <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-  </PropertyGroup>    
-
 </Project>

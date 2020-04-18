@@ -27,8 +27,4 @@
     <ProjectReference Include="..\..\src\UnitTestingDemo.Data\UnitTestingDemo.Data.csproj" />
     <ProjectReference Include="..\..\src\UnitTestingDemo.Domain\UnitTestingDemo.Domain.csproj" />
   </ItemGroup>
-  <PropertyGroup>
-      <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-  </PropertyGroup>    
-
 </Project>

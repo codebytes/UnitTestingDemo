@@ -15,11 +15,12 @@ namespace UnitTestingDemo.Data.Tests
         private BookRepository _bookRepository;
         private Mock<BookContext> _mockBookContext;
         private IQueryable<BookEntity> _books;
-
-        [TestInitialize]
-        public void TestInitialize()
+        private readonly AuthorEntity shakespeare = new AuthorEntity
         {
-            _books = new List<BookEntity>
+            Id = 1,
+            FirstName = "William",
+            LastName = "Shakespeare",
+            Books = new List<BookEntity>
             {
                 new BookEntity
                 {
@@ -43,13 +44,20 @@ namespace UnitTestingDemo.Data.Tests
                         LastName = "Shakespeare"
                     }
                 }
-            }.AsQueryable();
+            }
+        };
 
+        [Ignore]
+        [TestInitialize]
+        public void TestInitialize()
+        {
             var _mockBookContext = new DbContextMock<BookContext>(new DbContextOptionsBuilder<BookContext>().Options);
-            var bookDbSetMock = _mockBookContext.CreateDbSetMock(x => x.Books, _books);
+            var books = shakespeare.Books.AsQueryable();
+            var bookDbSetMock = _mockBookContext.CreateDbSetMock(x => x.Books, books);
             _bookRepository = new BookRepository(_mockBookContext.Object);
         }
 
+        [Ignore]
         [TestMethod]
         public void GetAll_WithItems_returnsAll()
         {

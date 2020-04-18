@@ -12,28 +12,34 @@ namespace UnitTestingDemo.Data.Tests
     [TestClass]
     public class BookRepositoryTestsWithInMemoryDB
     {
-        readonly List<BookEntity> _books = new List<BookEntity>
+        private readonly AuthorEntity shakespeare = new AuthorEntity
         {
-            new BookEntity
+            Id = 1,
+            FirstName = "William",
+            LastName = "Shakespeare",
+            Books = new List<BookEntity>
             {
-                Id = 1,
-                Title = "Hamlet",
-                Author = new AuthorEntity
+                new BookEntity
                 {
                     Id = 1,
-                    FirstName = "William",
-                    LastName = "Shakespeare"
-                }
-            },
-            new BookEntity
-            {
-                Id = 2,
-                Title = "A Midsummer Night's Dream",
-                Author = new AuthorEntity
+                    Title = "Hamlet",
+                    Author = new AuthorEntity
+                    {
+                        Id = 1,
+                        FirstName = "William",
+                        LastName = "Shakespeare"
+                    }
+                },
+                new BookEntity
                 {
-                    Id = 1,
-                    FirstName = "William",
-                    LastName = "Shakespeare"
+                    Id = 2,
+                    Title = "A Midsummer Night's Dream",
+                    Author = new AuthorEntity
+                    {
+                        Id = 1,
+                        FirstName = "William",
+                        LastName = "Shakespeare"
+                    }
                 }
             }
         };
@@ -47,7 +53,7 @@ namespace UnitTestingDemo.Data.Tests
                 .Options;
             using (var context = new BookContext(options))
             {
-                context.Books.AddRange(_books);
+                context.Authors.Add(shakespeare);
                 context.SaveChanges();
             }
 
@@ -60,7 +66,7 @@ namespace UnitTestingDemo.Data.Tests
             }
 
             //assert
-            Assert.AreEqual(_books.Count(), result.Count);
+            Assert.AreEqual(shakespeare.Books.Count(), result.Count);
         }
     }
 }

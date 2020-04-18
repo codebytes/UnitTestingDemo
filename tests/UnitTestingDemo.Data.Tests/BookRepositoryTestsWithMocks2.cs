@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EntityFrameworkCoreMock;
-using Microsoft.EntityFrameworkCore;
+using EntityFrameworkCore3Mock;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using UnitTestingDemo.Data.Contexts;
 using UnitTestingDemo.Data.EntityModels;
 
@@ -13,14 +11,13 @@ namespace UnitTestingDemo.Data.Tests
     public class BookRepositoryTestsWithMocks2
     {
         private BookRepository _bookRepository;
-        private Mock<BookContext> _mockBookContext;
+        private DbContextMock<BookContext> _mockBookContext;
         private IQueryable<BookEntity> _books;
-        private readonly AuthorEntity shakespeare = new AuthorEntity
+
+        [TestInitialize]
+        public void TestInitialize()
         {
-            Id = 1,
-            FirstName = "William",
-            LastName = "Shakespeare",
-            Books = new List<BookEntity>
+            _books = new List<BookEntity>
             {
                 new BookEntity
                 {
@@ -32,7 +29,7 @@ namespace UnitTestingDemo.Data.Tests
                         FirstName = "William",
                         LastName = "Shakespeare"
                     }
-                },
+},
                 new BookEntity
                 {
                     Id = 2,
@@ -44,20 +41,14 @@ namespace UnitTestingDemo.Data.Tests
                         LastName = "Shakespeare"
                     }
                 }
-            }
-        };
+            }.AsQueryable();
 
-        [Ignore]
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            var _mockBookContext = new DbContextMock<BookContext>(new DbContextOptionsBuilder<BookContext>().Options);
-            var books = shakespeare.Books.AsQueryable();
-            var bookDbSetMock = _mockBookContext.CreateDbSetMock(x => x.Books, books);
+            _mockBookContext = new DbContextMock<BookContext>();
+            var bookDbSetMock = _mockBookContext.CreateDbSetMock(x => x.Books, _books);
+
             _bookRepository = new BookRepository(_mockBookContext.Object);
         }
 
-        [Ignore]
         [TestMethod]
         public void GetAll_WithItems_returnsAll()
         {

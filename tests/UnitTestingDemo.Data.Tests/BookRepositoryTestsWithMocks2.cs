@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EntityFrameworkCoreMock;
-using Microsoft.EntityFrameworkCore;
+using EntityFrameworkCore3Mock;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using UnitTestingDemo.Data.Contexts;
 using UnitTestingDemo.Data.EntityModels;
 
@@ -13,7 +11,7 @@ namespace UnitTestingDemo.Data.Tests
     public class BookRepositoryTestsWithMocks2
     {
         private BookRepository _bookRepository;
-        private Mock<BookContext> _mockBookContext;
+        private DbContextMock<BookContext> _mockBookContext;
         private IQueryable<BookEntity> _books;
 
         [TestInitialize]
@@ -31,7 +29,7 @@ namespace UnitTestingDemo.Data.Tests
                         FirstName = "William",
                         LastName = "Shakespeare"
                     }
-                },
+},
                 new BookEntity
                 {
                     Id = 2,
@@ -45,8 +43,9 @@ namespace UnitTestingDemo.Data.Tests
                 }
             }.AsQueryable();
 
-            var _mockBookContext = new DbContextMock<BookContext>(new DbContextOptionsBuilder<BookContext>().Options);
+            _mockBookContext = new DbContextMock<BookContext>();
             var bookDbSetMock = _mockBookContext.CreateDbSetMock(x => x.Books, _books);
+
             _bookRepository = new BookRepository(_mockBookContext.Object);
         }
 

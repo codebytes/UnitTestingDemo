@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   solution: '**/*.sln'
@@ -16,6 +16,9 @@ variables:
   NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
   
 steps:
+- task: UseDotNet@2
+  inputs:
+    version: '3.1.x'
 - task: DotNetCoreCLI@2
   displayName: Restore nuget packages
   inputs:
@@ -36,16 +39,16 @@ steps:
   displayName: Test
   inputs:
     command: test
-    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true --collect:"XPlat Code Coverage"'
     projects: '$(solution)'
     nobuild: true
   continueOnError: true
 
-# Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
+  # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # First install the tool on the machine, then run it
 - script: |
     dotnet tool install -g dotnet-reportgenerator-globaltool
-    reportgenerator -reports:$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:Cobertura
+    reportgenerator -reports:$(Agent.TempDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:Cobertura
   displayName: Create Code coverage report
 
 # Publish the code coverage result (summary and web site)
@@ -56,13 +59,12 @@ steps:
   inputs:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
     pathToSources: '$(Build.SourcesDirectory)'
 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'VSTest'
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
     

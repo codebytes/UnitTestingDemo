@@ -64,7 +64,7 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'VSTest'
-    testResultsFiles: '**/*.cobertura.xml'
+    testResultsFiles: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
     

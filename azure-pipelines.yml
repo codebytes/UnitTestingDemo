@@ -65,12 +65,6 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     mergeTestResults: true
     failTaskOnFailedTests: true
-# - task: PublishTestResults@2
-#   inputs:
-#     testRunner: VSTest
-#     testResultsFiles: '$(Agent.TempDirectory)/**/*.trx'
-#     mergeTestResults: true
-#     failTaskOnFailedTests: true
     
 - task: DotNetCoreCLI@2
   inputs:

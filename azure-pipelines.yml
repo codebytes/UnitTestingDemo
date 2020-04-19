@@ -41,12 +41,12 @@ steps:
     nobuild: true
   continueOnError: true
 
-# Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
-# First install the tool on the machine, then run it
-- script: |
-    dotnet tool install -g dotnet-reportgenerator-globaltool
-    reportgenerator -reports:$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:Cobertura
-  displayName: Create Code coverage report
+# # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
+# # First install the tool on the machine, then run it
+# - script: |
+#     dotnet tool install -g dotnet-reportgenerator-globaltool
+#     reportgenerator -reports:$(Build.SourcesDirectory)/tests/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:Cobertura
+#   displayName: Create Code coverage report
 
 # Publish the code coverage result (summary and web site)
 # The summary allows to view the coverage percentage in the summary tab
@@ -56,8 +56,7 @@ steps:
   inputs:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
-    reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
-    SourcesDirectory: '$(Build.SourcesDirectory)'
+    pathToSources: '$(Build.SourcesDirectory)'
 
 - task: PublishTestResults@2
   inputs:

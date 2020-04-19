@@ -36,12 +36,12 @@ steps:
   displayName: Test
   inputs:
     command: test
-    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true --collect:"XPlat Code Coverage"'
     projects: '$(solution)'
     nobuild: true
   continueOnError: true
 
-# Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
+  # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # First install the tool on the machine, then run it
 - script: |
     dotnet tool install -g dotnet-reportgenerator-globaltool

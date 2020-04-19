@@ -36,11 +36,18 @@ steps:
   displayName: Test
   inputs:
     command: test
-    arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    # arguments: '--configuration $(BuildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura'
+    arguments: '--configuration $(BuildConfiguration)'
     projects: '$(solution)'
     nobuild: true
   continueOnError: true
 
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '**/TEST-*.xml'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
 # # Generate the report using ReportGenerator (https://github.com/danielpalme/ReportGenerator)
 # # First install the tool on the machine, then run it
 # - script: |
@@ -59,11 +66,12 @@ steps:
 #     reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
 #     pathToSources: '$(Build.SourcesDirectory)'
 
-- task: PublishTestResults@2
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '$(Agent.TempDirectory)/**/*.trx'
-    failTaskOnFailedTests: true
+# - task: PublishTestResults@2
+#   inputs:
+#     testRunner: VSTest
+#     testResultsFiles: '$(Agent.TempDirectory)/**/*.trx'
+#     mergeTestResults: true
+#     failTaskOnFailedTests: true
     
 - task: DotNetCoreCLI@2
   inputs:

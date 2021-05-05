@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EntityFrameworkCore3Mock;
+using EntityFrameworkCoreMock;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using UnitTestingDemo.Data.Contexts;
 using UnitTestingDemo.Data.EntityModels;

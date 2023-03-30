@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MoreLinq.Extensions;
 using UnitTestingDemo.Models;
 using UnitTestingDemo.Services.Interfaces;
 

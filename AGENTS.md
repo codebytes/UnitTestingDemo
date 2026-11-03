@@ -23,9 +23,9 @@ dotnet test --no-restore --verbosity normal
 - The code is a teaching sample: keep each layer small and keep dependencies injected through interfaces so the tests stay easy to read.
 - `.github/workflows/dotnetcore.yml` runs the build and tests; CodeQL, super-linter, OSSAR, and ShiftLeft workflows scan pull requests. `azure-pipelines.yml` is the original Azure Pipelines version of the same build.
 
-## README
+## Readme
 
-- Keep the README sections in this order: Recordings, Resources (where present).
+- Keep the readme sections in this order: Recordings, Resources (where present).
 - When a new recording of the talk is published, add it at the top of `## Recordings` as `- [Event Year](https://www.youtube.com/watch?v=VIDEO_ID)`. When the video's title differs from the talk's, add an em dash and the recorded title after the event. Keep the list newest first.
 - The talk also appears on <https://chris-ayers.com/speaking/> (source: `content/speaking.md` in [codebytes/codebytes.github.io](https://github.com/codebytes/codebytes.github.io)); new events and recordings belong there too.
 
